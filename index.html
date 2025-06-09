@@ -1,0 +1,820 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daniel Simatupang| Futuristic Portfolio</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/three@0.132.2/build/three.min.js"></script>
+    <script src="https://unpkg.com/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="antialiased">
+    <!-- 3D Background Canvas -->
+    <div id="canvas-container" class="fixed top-0 left-0 w-full h-full -z-10 opacity-30"></div>
+    
+    <!-- Navigation -->
+    <nav class="fixed w-full bg-black bg-opacity-80 backdrop-blur-md z-50 border-b border-gray-800">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-xl font-bold gradient-text">DHS</a>
+            <div class="flex items-center space-x-6">
+                <div class="relative hidden md:block">
+                    <button id="language-toggle" class="flex items-center space-x-1 px-3 py-1 rounded-full bg-gray-800 hover:bg-gray-700 transition">
+                        <i class="fas fa-globe text-purple-400"></i>
+                        <span class="text-white">EN</span>
+                        <i class="fas fa-chevron-down text-xs text-gray-400"></i>
+                    </button>
+                    <div id="language-dropdown" class="hidden absolute right-0 mt-2 w-32 bg-gray-800 rounded-lg shadow-lg py-1 z-50">
+                        <a href="#" data-lang="en" class="block px-4 py-2 text-white hover:bg-purple-600 transition">English</a>
+                        <a href="#" data-lang="id" class="block px-4 py-2 text-white hover:bg-purple-600 transition">Bahasa</a>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                <a href="#about" class="hover:text-purple-400 transition">About</a>
+                <a href="#experience" class="hover:text-purple-400 transition">Experience</a>
+                <a href="#education" class="hover:text-purple-400 transition">Education</a>
+                <a href="#skills" class="hover:text-purple-400 transition">Skills</a>
+                <a href="#projects" class="hover:text-purple-400 transition">Projects</a>
+                <a href="#contact" class="hover:text-purple-400 transition">Contact</a>
+            </div>
+            <button class="md:hidden text-white focus:outline-none">
+                <i class="fas fa-bars text-xl"></i>
+            </button>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="min-h-screen flex items-center pt-20">
+        <div class="container mx-auto px-6 flex flex-col lg:flex-row items-center justify-between">
+            <div class="lg:w-1/2 mb-12 lg:mb-0">
+                <h1 class="text-4xl md:text-6xl font-bold mb-6">
+                    <span class="gradient-text glow">DANIEL HASIHOLAN SIMATUPANG</span>
+                </h1>
+                <h2 class="text-2xl md:text-3xl text-purple-300 mb-6">Instrumentation & Control | Material Computation | Healt Safety Environtment Enthusiast</h2>
+                <p class="text-gray-300 mb-8 text-lg max-w-2xl leading-relaxed">
+                    Physics Engineering graduate specializing in instrumentation, material computation, and IoT-based microcontrollers, Healt Safety Environtment enthusiast. Passionate about innovative technology and problem-solving in dynamic environments.
+                </p>
+                <div class="flex space-x-4">
+                    <a href="#contact" class="px-8 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full font-bold hover:opacity-90 transition">Contact Me</a>
+                    <a href="#" class="px-8 py-3 border border-purple-500 text-purple-400 rounded-full font-bold hover:bg-purple-900 hover:bg-opacity-30 transition">Download CV</a>
+                </div>
+            </div>
+            <div class="lg:w-1/2 relative">
+                <div class="relative w-full max-w-md mx-auto">
+                    <div class="absolute w-full h-full bg-gradient-to-tr from-cyan-500 to-purple-600 rounded-2xl -rotate-6 scale-105 opacity-30"></div>
+                    <div class="relative bg-gray-900 rounded-2xl overflow-hidden card-3d">
+                        <img src="WhatsApp Image 2025-06-07 at 13.14.00_fbb355c3.jpg" alt="Daniel Simatupang" class="w-full h-auto object-cover">
+                        <div class="absolute bottom-0 left-0 right-0 p-6 bg-gradient-to-t from-black to-transparent">
+                            <h3 class="text-2xl font-bold">Currently Available</h3>
+                            <p class="text-gray-300">For research collaborations and innovative projects</p>
+                        </div>
+                    </div>
+                    <div class="absolute -bottom-6 -right-6 bg-gradient-to-r from-cyan-500 to-purple-600 p-4 rounded-full">
+                        <i class="fas fa-arrow-right text-2xl"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-0 right-0 text-center scroll-down hidden md:block">
+            <i class="fas fa-chevron-down text-purple-400 animate-bounce"></i>
+        </div>
+    </section>
+    
+    <!-- About Section -->
+    <section id="about" class="py-20 bg-gray-900 bg-opacity-70">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">PROFESSIONAL PROFILE</span>
+            </h2>
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-800 rounded-xl p-8 card-3d">
+                        <h3 class="text-2xl font-bold mb-4 gradient-text">About Me</h3>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            Graduate of Physics Engineering from the Sumatra Institute of Technology with a specialization in Instrumentation and Control, Material Computing, and Working in the Health Safety Environment field. Experienced in IoT-based microcontrollers, acoustic room analysis, engineering mechanics, and engineering drawings.
+                        </p>
+                        <p class="text-gray-300 mb-6 leading-relaxed">
+                            I am currently working at PT Bina Marchia Mandiri as a Health Safety Environment. I have mastered the application of K3 standards in the work environment.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            I am also enthusiastic about contributing to a dynamic and innovative team, open to learning and growing with the company. Confident that my experience will be valuable to the organization where I work.
+                        </p>
+                    </div>
+                </div>
+                <div class="lg:w-1/2">
+                    <div class="bg-gray-800 rounded-xl p-8 card-3d">
+                        <h3 class="text-2xl font-bold mb-6 gradient-text">Personal Information</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-start">
+                                <div class="w-8 mr-4 pt-1">
+                                    <i class="fas fa-envelope text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 text-sm">Email</h4>
+                                    <p class="text-gray-200">simatupangdaniel960@gmail.com</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 mr-4 pt-1">
+                                    <i class="fas fa-phone text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 text-sm">Phone</h4>
+                                    <p class="text-gray-200">085794239084</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 mr-4 pt-1">
+                                    <i class="fas fa-map-marker-alt text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 text-sm">Location</h4>
+                                    <p class="text-gray-200">Batam, Indonesia</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 mr-4 pt-1">
+                                    <i class="fas fa-graduation-cap text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 text-sm">Education</h4>
+                                    <p class="text-gray-200">Institut Teknologi Sumatera – S1 Teknik Fisika (GPA: 3.25/4.00)</p>
+                                </div>
+                            </div>
+                            <div class="flex items-start">
+                                <div class="w-8 mr-4 pt-1">
+                                    <i class="fas fa-certificate text-purple-400"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-gray-400 text-sm">Certification</h4>
+                                    <p class="text-gray-200">Ahli Muda K3 – Ministry of Public Works and Housing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+     <!-- Experience Section -->
+    <section id="experience" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">PROFESSIONAL EXPERIENCE</span>
+            </h2>
+            <div class="space-y-8">
+                <!-- Experience Item 1 -->
+                <div class="bg-gray-800 rounded-xl p-6 card-3d relative overflow-hidden">
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-purple-600 rounded-full filter blur-2xl opacity-20"></div>
+                    <div class="flex items-start mb-2">
+                        <div class="w-4 h-4 mt-2 mr-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0"></div>
+                        <div>
+                            <h3 class="text-xl font-bold">Health Safety Environtment (HSE) Engineer</h3>
+                            <h4 class="text-purple-300">PT Bina Marchia Mandiri</h4>
+                            <p class="text-gray-400 text-sm mb-3">January 2025 - Now| Lampung Selatan, Lampung</p>
+                        </div>
+                    </div>
+                    <ul class="ml-7 list-disc pl-5 text-gray-300 space-y-2">
+                        <li>Implementation of K3 standards in the work environment</li>
+                        <li>Development and Implementation of Safety Policies</li>
+                        <li>Making environmental service reports</li>
+                        <li>Reporting waste on the Festronik KLHK website</li>
+                        <li>Monitoring and Auditing Safety Performance</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 2 -->
+                <div class="bg-gray-800 rounded-xl p-6 card-3d relative overflow-hidden">
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-purple-600 rounded-full filter blur-2xl opacity-20"></div>
+                    <div class="flex items-start mb-2">
+                        <div class="w-4 h-4 mt-2 mr-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0"></div>
+                        <div>
+                            <h3 class="text-xl font-bold">Computer Technician</h3>
+                            <h4 class="text-purple-300">Angkasa Notebook</h4>
+                            <p class="text-gray-400 text-sm mb-3">July 2024 - December 2024 | Lampung Selatan, Lampung</p>
+                        </div>
+                    </div>
+                    <ul class="ml-7 list-disc pl-5 text-gray-300 space-y-2">
+                        <li>Repairing damaged laptops or computers</li>
+                        <li>Replacing computer or laptop spare parts</li>
+                        <li>Installing Windows</li>
+                        <li>Reporting waste on the Festronik KLHK website</li>
+                        <li>Installing drivers and software on laptops and computers</li>
+                    </ul>
+                </div>
+
+                <!-- Experience Item 3 -->
+                <div class="bg-gray-800 rounded-xl p-6 card-3d relative overflow-hidden">
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-purple-600 rounded-full filter blur-2xl opacity-20"></div>
+                    <div class="flex items-start mb-2">
+                        <div class="w-4 h-4 mt-2 mr-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0"></div>
+                        <div>
+                            <h3 class="text-xl font-bold">Research Assistant</h3>
+                            <h4 class="text-purple-300">Badan Riset Inovasi Nasional (BRIN)</h4>
+                            <p class="text-gray-400 text-sm mb-3">July 2022 - August 2022 | Tanjung Bintang, Lampung</p>
+                        </div>
+                    </div>
+                    <ul class="ml-7 list-disc pl-5 text-gray-300 space-y-2">
+                        <li>Analyzed comparison of Feedforward Neural Networks with Wiener Neural Networks in sodium bicarbonate production from seawater</li>
+                        <li>Simulated sodium bicarbonate production using MATLAB</li>
+                        <li>Data processing using Python simulations</li>
+                        <li>Research report and journal preparation</li>
+                    </ul>
+                </div>
+                
+                <!-- Experience Item 4 -->
+                <div class="bg-gray-800 rounded-xl p-6 card-3d relative overflow-hidden">
+                    <div class="absolute -top-4 -left-4 w-20 h-20 bg-cyan-500 rounded-full filter blur-2xl opacity-20"></div>
+                    <div class="flex items-start mb-2">
+                        <div class="w-4 h-4 mt-2 mr-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0"></div>
+                        <div>
+                            <h3 class="text-xl font-bold">Ion Battery Research Assistant</h3>
+                            <h4 class="text-purple-300">Institut Teknologi Sumatera</h4>
+                            <p class="text-gray-400 text-sm mb-3">February 2024 - April 2024 | Lampung Selatan, Lampung</p>
+                        </div>
+                    </div>
+                    <ul class="ml-7 list-disc pl-5 text-gray-300 space-y-2">
+                        <li>Conducted research on potential anodes for ion batteries</li>
+                        <li>Calculated anode energy using Density Functional Theory computation</li>
+                        <li>Created chemical structures on anodes</li>
+                        <li>Conducted data collection, data processing, and research journal preparation</li>
+                    </ul>
+                </div>
+                
+                <!-- Experience Item 5 -->
+                <div class="bg-gray-800 rounded-xl p-6 card-3d relative overflow-hidden">
+                    <div class="absolute -top-4 -right-4 w-20 h-20 bg-purple-600 rounded-full filter blur-2xl opacity-20"></div>
+                    <div class="flex items-start mb-2">
+                        <div class="w-4 h-4 mt-2 mr-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0"></div>
+                        <div>
+                            <h3 class="text-xl font-bold">Material Physics Laboratory Coordinator</h3>
+                            <h4 class="text-purple-300">Institut Teknologi Sumatera</h4>
+                            <p class="text-gray-400 text-sm mb-3">February 2024 - August 2024 | Lampung Selatan, Lampung</p>
+                        </div>
+                    </div>
+                    <ul class="ml-7 list-disc pl-5 text-gray-300 space-y-2">
+                        <li>Created practicum modules</li>
+                        <li>Recruited practicum assistants and developed practicum modules</li>
+                        <li>Managed and maintained laboratory equipment</li>
+                        <li>Input practitioner grades</li>
+                    </ul>
+                </div>
+        </div>
+    </section>
+    
+    <!-- Education Section -->
+    <section id="education" class="py-20 bg-gray-900 bg-opacity-70">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">EDUCATION & ORGANIZATIONS</span>
+            </h2>
+            
+            <div class="flex flex-col md:flex-row gap-8">
+                <!-- Education -->
+                <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-8 card-3d">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">Education</h3>
+                    <div class="relative">
+                        <div class="absolute left-5 h-full w-0.5 bg-gradient-to-b from-cyan-500 to-purple-600"></div>
+                        
+                        <div class="relative pl-16 pb-8">
+                            <div class="absolute left-0 w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-university text-white"></i>
+                            </div>
+                            <h4 class="text-xl font-bold mb-1">S1 Teknik Fisika</h4>
+                            <p class="text-purple-300 mb-2">Institut Teknologi Sumatera</p>
+                            <p class="text-gray-400 text-sm mb-3">Aug 2019 – Jul 2024 | GPA: 3.25/4.00</p>
+                            <p class="text-gray-300">Specialized in Instrumentation and Control, Material Computation, and Design. Involved in laboratory research for ion battery anode development.</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Organizations -->
+                <div class="w-full md:w-1/2 bg-gray-800 rounded-xl p-8 card-3d">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">Organizational Experience</h3>
+                    <div class="space-y-6">
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-users text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold">Kepala Divisi Minat dan Bakat</h4>
+                                <p class="text-purple-300">Himpunan Mahasiswa Teknik Fisika ITERA</p>
+                                <p class="text-gray-400 text-sm mb-2">Mar 2021 - Mar 2022</p>
+                                <ul class="list-disc pl-5 text-gray-300">
+                                    <li>Created annual work programs</li>
+                                    <li>Prepared monthly division reports and staff performance evaluations</li>
+                                    <li>Responsible for department sports and arts competitions</li>
+                                </ul>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start">
+                            <div class="w-10 h-10 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0 flex items-center justify-center mr-4">
+                                <i class="fas fa-hands-helping text-white"></i>
+                            </div>
+                            <div>
+                                <h4 class="text-xl font-bold">Ketua</h4>
+                                <p class="text-purple-300">Keluarga Mahasiswa Pangaribuan Lampung</p>
+                                <p class="text-gray-400 text-sm mb-2">2019 - 2020</p>
+                                <ul class="list-disc pl-5 text-gray-300">
+                                    <li>Created work programs during tenure</li>
+                                    <li>Conducted volunteer activities at high schools in Pangaribuan district</li>
+                                    <li>Assisted new students from Pangaribuan district with administrative processes</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Skills Section -->
+    <section id="skills" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">SKILLS & EXPERTISE</span>
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Personal Skills -->
+                <div class="bg-gray-800 rounded-xl p-8 card-3d">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">Personality Traits</h3>
+                    <div class="space-y-4">
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Time Management</span>
+                                <span class="text-purple-300">95%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 95%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Data Analysis</span>
+                                <span class="text-purple-300">90%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 90%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Problem Solving</span>
+                                <span class="text-purple-300">92%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 92%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Critical Thinking</span>
+                                <span class="text-purple-300">88%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 88%"></div>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="flex justify-between mb-1">
+                                <span class="text-gray-300">Leadership</span>
+                                <span class="text-purple-300">85%</span>
+                            </div>
+                            <div class="skill-bar">
+                                <div class="skill-level" style="width: 85%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Software Skills -->
+                <div class="bg-gray-800 rounded-xl p-8 card-3d">
+                    <h3 class="text-2xl font-bold mb-6 gradient-text">Software & Technical Skills</h3>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fab fa-microsoft text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-300">Microsoft Office</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-microchip text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-300">Arduino IDE</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-code text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-300">Python</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-laptop-code text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-300">C++</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-drafting-compass text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-300">AutoCAD</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fab fa-linux text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-300">Linux</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-atom text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-300">Quantum Espresso</span>
+                        </div>
+                        <div class="flex items-center space-x-3">
+                            <div class="w-8 h-8 rounded-lg bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center">
+                                <i class="fas fa-project-diagram text-white text-sm"></i>
+                            </div>
+                            <span class="text-gray-300">PLC</span>
+                        </div>
+                    </div>
+                    
+                    <h4 class="text-lg font-bold mt-8 mb-4 gradient-text">Languages</h4>
+                    <div class="flex space-x-8">
+                        <div class="flex items-center">
+                            <div class="mr-3">
+                                <span class="inline-block w-3 h-3 rounded-full bg-cyan-400"></span>
+                            </div>
+                            <div>
+                                <p class="text-gray-300">Bahasa Indonesia</p>
+                                <p class="text-gray-400 text-sm">Native</p>
+                            </div>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="mr-3">
+                                <span class="inline-block w-3 h-3 rounded-full bg-purple-400"></span>
+                            </div>
+                            <div>
+                                <p class="text-gray-300">English</p>
+                                <p class="text-gray-400 text-sm">Professional</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 bg-gray-900 bg-opacity-70">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">MAJOR PROJECTS & PUBLICATION</span>
+            </h2>
+            
+            <div class="flex flex-col lg:flex-row gap-8 mb-12">
+                <!-- Final Project -->
+                <div class="w-full lg:w-1/2 bg-gray-800 rounded-xl p-8 card-3d">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-book-open text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold gradient-text">Final Project</h3>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Theoretical Study of Lithium Atoms on Layered GeTe Anode Phase Buckled: Adsorption Energy</h4>
+                    <p class="text-gray-300 mb-4">
+                        Conducted computational research using Density Functional Theory to analyze lithium atom adsorption on GeTe layered anode structures for potential ion battery applications.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="px-3 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">Density Functional Theory</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">Quantum Espresso</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">Material Computation</span>
+                    </div>
+                </div>
+                
+                <!-- Publication -->
+                <div class="w-full lg:w-1/2 bg-gray-800 rounded-xl p-8 card-3d">
+                    <div class="flex items-center mb-6">
+                        <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center mr-4">
+                            <i class="fas fa-file-alt text-white text-xl"></i>
+                        </div>
+                        <h3 class="text-2xl font-bold gradient-text">Publication</h3>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-3">Adsorption and Diffusion Energies Calculation of Sodium Ion Battery using GeTe Anode: A Density Functional Theory Study</h4>
+                    <p class="text-gray-300 mb-4">
+                        Published research analyzing sodium ion interaction with GeTe anode materials, providing insights into potential anode materials for sodium ion battery technology.
+                    </p>
+                    <div class="flex flex-wrap gap-2 mt-6">
+                        <span class="px-3 py-1 rounded-full text-xs bg-gray-700 text-purple-300">Journal Publication</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-gray-700 text-purple-300">Battery Technology</span>
+                        <span class="px-3 py-1 rounded-full text-xs bg-gray-700 text-purple-300">DFT Computation</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Other Projects -->
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="bg-gray-800 rounded-xl p-6 card-3d">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center mb-4">
+                        <i class="fas fa-brain text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">Neural Network Comparison</h4>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Compared Feedforward Neural Networks with Wiener Neural Networks for NaHCO3 production from seawater.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">MATLAB</span>
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">Python</span>
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">Data Analysis</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl p-6 card-3d">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center mb-4">
+                        <i class="fas fa-battery-full text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">Anode Development</h4>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Research on potential anodes for ion batteries using DFT computation and material structure design.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-purple-300">Quantum Espresso</span>
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-purple-300">Material Science</span>
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-purple-300">Battery Technology</span>
+                    </div>
+                </div>
+                
+                <div class="bg-gray-800 rounded-xl p-6 card-3d">
+                    <div class="w-16 h-16 rounded-2xl bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center mb-4">
+                        <i class="fas fa-flask text-white text-2xl"></i>
+                    </div>
+                    <h4 class="text-xl font-bold text-white mb-2">X-ray Diffraction</h4>
+                    <p class="text-gray-300 text-sm mb-4">
+                        Assisted students in XRD practical work for material structure analysis and characterization.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">XRD Analysis</span>
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">Material Characterization</span>
+                        <span class="px-2 py-1 rounded-full text-xs bg-gray-700 text-cyan-300">Lab Assistant</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="py-20">
+        <div class="container mx-auto px-6">
+            <h2 class="text-3xl md:text-4xl font-bold mb-16 text-center">
+                <span class="gradient-text">GET IN TOUCH</span>
+            </h2>
+            
+            <div class="flex flex-col lg:flex-row gap-12">
+                <div class="w-full lg:w-1/2">
+                    <div class="bg-gray-800 rounded-xl p-8 card-3d relative overflow-hidden h-full">
+                        <div class="absolute -top-20 -right-20 w-60 h-60 bg-purple-600 rounded-full filter blur-3xl opacity-10"></div>
+                        <div class="absolute -bottom-20 -left-20 w-60 h-60 bg-cyan-500 rounded-full filter blur-3xl opacity-10"></div>
+                        
+                        <h3 class="text-2xl font-bold mb-6 gradient-text">Contact Information</h3>
+                        <p class="text-gray-300 mb-8">
+                            Interested in working together or have any questions? Feel free to reach out through any of these channels.
+                        </p>
+                        
+                        <div class="space-y-6">
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0 flex items-center justify-center mr-4">
+                                    <i class="fas fa-envelope text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-100">Email</h4>
+                                    <a href="mailto:simatupangdaniel960@gmail.com" class="text-purple-300 hover:text-purple-200 transition">simatupangdaniel960@gmail.com</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0 flex items-center justify-center mr-4">
+                                    <i class="fas fa-phone-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-100">Phone</h4>
+                                    <a href="tel:085794239084" class="text-purple-300 hover:text-purple-200 transition">085794239084</a>
+                                </div>
+                            </div>
+                            
+                            <div class="flex items-start">
+                                <div class="w-12 h-12 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 flex-shrink-0 flex items-center justify-center mr-4">
+                                    <i class="fas fa-map-marker-alt text-white"></i>
+                                </div>
+                                <div>
+                                    <h4 class="text-lg font-bold text-gray-100">Location</h4>
+                                    <p class="text-purple-300">Batam, Indonesia</p>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-12">
+                            <h4 class="text-lg font-bold text-gray-100 mb-4">Connect With Me</h4>
+                            <div class="flex space-x-4">
+                                <a href="https://www.linkedin.com/in/daniel-hasiholan-simatupang-a9538b31b/" class="w-10 h-10 rounded-full bg-gray-700 hover:bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center transition">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="https://github.com/DanielTupang" class="w-10 h-10 rounded-full bg-gray-700 hover:bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center transition">
+                                    <i class="fab fa-github"></i>
+                                </a>
+                                <a href="https://www.instagram.com/nieltupangg?igsh=ZDdmdGFrbm1qY3Jw" class="w-10 h-10 rounded-full bg-gray-700 hover:bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center transition">
+                                    <i class="fab fa-instagram"></i>
+                                </a>
+                                <a href="" class="w-10 h-10 rounded-full bg-gray-700 hover:bg-gradient-to-r from-cyan-500 to-purple-600 flex items-center justify-center transition">
+                                    <i class="fab fa-facebook"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="w-full lg:w-1/2">
+                    <div class="bg-gray-800 rounded-xl p-8 card-3d">
+                        <h3 class="text-2xl font-bold mb-6 gradient-text">Send Me a Message</h3>
+                        <form>
+                            <div class="mb-6">
+                                <label for="name" class="block text-gray-300 mb-2">Your Name</label>
+                                <input type="text" id="name" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                            </div>
+                            <div class="mb-6">
+                                <label for="email" class="block text-gray-300 mb-2">Your Email</label>
+                                <input type="email" id="email" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                            </div>
+                            <div class="mb-6">
+                                <label for="subject" class="block text-gray-300 mb-2">Subject</label>
+                                <input type="text" id="subject" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white">
+                            </div>
+                            <div class="mb-6">
+                                <label for="message" class="block text-gray-300 mb-2">Your Message</label>
+                                <textarea id="message" rows="5" class="w-full px-4 py-3 bg-gray-700 border border-gray-600 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500 text-white"></textarea>
+                            </div>
+                            <button type="submit" class="w-full px-6 py-3 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg font-bold hover:opacity-90 transition flex items-center justify-center">
+                                <span>Send Message</span>
+                                <i class="fas fa-paper-plane ml-2"></i>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="bg-black bg-opacity-80 py-10 border-t border-gray-800">
+        <div class="container mx-auto px-6">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <h2 class="text-2xl font-bold gradient-text">DANIEL HASIHOLAN SIMATUPANG</h2>
+                    <p class="text-gray-400 mt-2">Instrumentation & Control | Material Computation | Healt Safety Environtment Enthusiast</p>
+                </div>
+                <div class="flex space-x-6">
+                    <a href="https://www.linkedin.com/in/daniel-hasiholan-simatupang-a9538b31b/" class="text-gray-400 hover:text-purple-300 transition">
+                        <i class="fab fa-linkedin-in text-xl"></i>
+                    </a>
+                    <a href="https://github.com/DanielTupang" class="text-gray-400 hover:text-purple-300 transition">
+                        <i class="fab fa-github text-xl"></i>
+                    </a>
+                    <a href="https://www.instagram.com/nieltupangg?igsh=ZDdmdGFrbm1qY3Jw" class="text-gray-400 hover:text-purple-300 transition">
+                        <i class="fab fa-instagram text-xl"></i>
+                    </a>
+                    <a href="" class="text-gray-400 hover:text-purple-300 transition">
+                        <i class="fab fa-facebook"></i>
+                    </a>
+                </div>
+            </div>
+            <div class="border-t border-gray-800 mt-10 pt-6 text-center text-gray-500">
+                <p>© 2024 Daniel Hasiholan Simatupang. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+    
+    <!-- 3D Background Script -->
+    <script>
+        // Simple 3D background using Three.js
+        document.addEventListener('DOMContentLoaded', function() {
+            // Setup scene
+            const scene = new THREE.Scene();
+            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
+            const renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            renderer.setSize(window.innerWidth, window.innerHeight);
+            renderer.setPixelRatio(window.devicePixelRatio);
+            document.getElementById('canvas-container').appendChild(renderer.domElement);
+            
+            // Add lights
+            const ambientLight = new THREE.AmbientLight(0x404040, 0.5);
+            scene.add(ambientLight);
+            
+            const directionalLight = new THREE.DirectionalLight(0xffffff, 0.8);
+            directionalLight.position.set(1, 1, 1);
+            scene.add(directionalLight);
+            
+            // Add floating 3D objects
+            const geometry = new THREE.TorusKnotGeometry(1, 0.3, 100, 16);
+            const material = new THREE.MeshPhongMaterial({
+                color: 0x00ffff,
+                emissive: 0x111111,
+                specular: 0xffffff,
+                shininess: 30,
+                transparent: true,
+                opacity: 0.1,
+                wireframe: true
+            });
+            
+            const knot1 = new THREE.Mesh(geometry, material);
+            knot1.position.set(0, 0, -30);
+            knot1.scale.set(8, 8, 8);
+            scene.add(knot1);
+            
+            const knot2 = new THREE.Mesh(geometry, material);
+            knot2.position.set(10, 5, -40);
+            knot2.rotation.set(0.5, 0.3, 0);
+            knot2.scale.set(5, 5, 5);
+            scene.add(knot2);
+            
+            const knot3 = new THREE.Mesh(geometry, material);
+            knot3.position.set(-15, -5, -50);
+            knot3.rotation.set(1, 0, 0.5);
+            knot3.scale.set(6, 6, 6);
+            knot3.material.color.setHex(0xfc00ff);
+            scene.add(knot3);
+            
+            // Set camera position
+            camera.position.z = 5;
+            
+            // Animation
+            function animate() {
+                requestAnimationFrame(animate);
+                
+                knot1.rotation.x += 0.001;
+                knot1.rotation.y += 0.002;
+                
+                knot2.rotation.x += 0.002;
+                knot2.rotation.y += 0.001;
+                
+                knot3.rotation.x += 0.0015;
+                knot3.rotation.z += 0.002;
+                
+                renderer.render(scene, camera);
+            }
+            
+            // Handle window resize
+            function onWindowResize() {
+                camera.aspect = window.innerWidth / window.innerHeight;
+                camera.updateProjectionMatrix();
+                renderer.setSize(window.innerWidth, window.innerHeight);
+            }
+            
+            window.addEventListener('resize', onWindowResize, false);
+            
+            // Start animation
+            animate();
+        });
+    </script>
+    
+    <!-- Language Switching -->
+    <script>
+        document.getElementById('language-toggle').addEventListener('click', function(e) {
+            e.stopPropagation();
+            document.getElementById('language-dropdown').classList.toggle('hidden');
+        });
+
+        document.querySelectorAll('#language-dropdown a').forEach(link => {
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                const lang = this.getAttribute('data-lang');
+                // Here you would implement actual language switching
+                alert('Language switching to ' + lang + ' would be implemented here');
+                document.getElementById('language-dropdown').classList.add('hidden');
+            });
+        });
+
+        // Close dropdown when clicking outside
+        document.addEventListener('click', function() {
+            document.getElementById('language-dropdown').classList.add('hidden');
+        });
+    </script>
+
+    <!-- Smooth scrolling for navigation -->
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
